@@ -38,7 +38,13 @@ let package = Package(
         .target(name: "KNMacroHelpers", dependencies: ["KNMacroHelpersMacros"]),
 
         // A client of the library, which is able to use the macro in its own code.
-        .executableTarget(name: "KNMacroHelpersClient", dependencies: ["KNMacroHelpers"]),
+        .executableTarget(
+            name: "KNMacroHelpersClient",
+            dependencies: [
+                "KNMacroHelpers",
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+            ]
+        ),
 
         // A test target used to develop the macro implementation.
         .testTarget(
